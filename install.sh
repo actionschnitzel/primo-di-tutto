@@ -9,8 +9,10 @@ NC='\033[0m' # No Color
 
 printf "${GREEN}I now install dependencies${NC}\n\n"
 
-sudo apt install -y git python3-tk python3-ttkthemes python3-psutil install xterm 
-
+sudo apt install git -y
+sudo apt install python3-tk -y
+sudo apt install python3-ttkthemes -y
+sudo apt install xterm -y
 clear
 
 cd
