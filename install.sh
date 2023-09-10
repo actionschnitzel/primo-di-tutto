@@ -9,16 +9,24 @@ NC='\033[0m' # No Color
 
 printf "${GREEN}I now install dependencies${NC}\n\n"
 
-sudo apt install git python3-tk python3-ttkthemes python3-psutil install xterm -y
+sudo apt install -y git python3-tk python3-ttkthemes python3-psutil install xterm 
 
 clear
 
 cd
 
 
-
-git clone https://github.com/actionschnitzel/surface-on-ubuntu-gui.git
-cd primo-di-tutto
+if [ -d "$HOME/primo-di-tutto" ] 
+then
+    printf "${YELLOW}[UPDATE]${NC}I will install the newest version.\n\n" 
+    rm -rf $HOME/primo-di-tutto
+    git clone https://github.com/actionschnitzel/primo-di-tutto.git
+    cd primo-di-tutto
+else
+    printf "${YELLOW}[NEW INSTALL]${NC}I will now install Primo\n\n"
+    git clone https://github.com/actionschnitzel/primo-di-tutto.git
+    cd primo-di-tutto
+fi
 
 clear
 
@@ -31,7 +39,7 @@ fi
 
 echo "[Desktop Entry]
 Version=2.1
-Exec=${DIRECTORY}/start.sh
+Exec=${DIRECTORY}/primo.py
 Name=Primo
 GenericName=Primo
 Encoding=UTF-8
