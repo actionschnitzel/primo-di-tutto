@@ -16,17 +16,9 @@ clear
 cd
 
 
-if [ -d "$HOME/primo-di-tutto" ] 
-then
-    printf "${YELLOW}[UPDATE]${NC}I will install the newest version.\n\n" 
-    rm -rf $HOME/primo-di-tutto
+
     git clone https://github.com/actionschnitzel/surface-on-ubuntu-gui.git
     cd primo-di-tutto
-else
-    printf "${YELLOW}[NEW INSTALL]${NC}I will now install Primo\n\n"
-    git clone https://github.com/actionschnitzel/surface-on-ubuntu-gui.git
-    cd primo-di-tutto
-fi
 
 clear
 
