@@ -9,7 +9,7 @@ NC='\033[0m' # No Color
 
 printf "${GREEN}I now install dependencies${NC}\n\n"
 
-sudo apt install -y git python3-tk python3-ttkthemes python3-psutil install xterm 
+sudo apt install git python3-tk python3-ttkthemes python3-psutil install xterm -y
 
 clear
 
@@ -23,7 +23,7 @@ then
     git clone https://github.com/actionschnitzel/surface-on-ubuntu-gui.git
     cd primo-di-tutto
 else
-    printf "${YELLOW}[NEW INSTALL]${NC}I will now install PiGro\n\n"
+    printf "${YELLOW}[NEW INSTALL]${NC}I will now install Primo\n\n"
     git clone https://github.com/actionschnitzel/surface-on-ubuntu-gui.git
     cd primo-di-tutto
 fi
