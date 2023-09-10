@@ -17,8 +17,8 @@ cd
 
 
 
-    git clone https://github.com/actionschnitzel/surface-on-ubuntu-gui.git
-    cd primo-di-tutto
+git clone https://github.com/actionschnitzel/surface-on-ubuntu-gui.git
+cd primo-di-tutto
 
 clear
 
