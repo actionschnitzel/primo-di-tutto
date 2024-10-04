@@ -7,6 +7,7 @@ from PIL import Image, ImageTk
 from resorcess import *
 from apt_manage import *
 from flatpak_alias_list import *
+from tabs.welcome_tab import WelcomeTab
 from tabs.dash_tab import DashTab
 from tabs.update_tab import UpdateTab
 from tabs.sources_tab import SourcesTab
@@ -95,19 +96,27 @@ class MainApplication(tk.Tk):
             file=f"{application_path}/images/icons/nav_bar/sources_light_16x16.png"
         )
 
+
+
+
         self.notebook = ttk.Notebook(self, width=app_width, height=app_height)
         self.notebook.grid(row=0, column=0, sticky="nsew")
 
+        self.willkommen_tab = WelcomeTab(self.notebook)
         self.dash_tab = DashTab(self.notebook)
         self.update_tab = UpdateTab(self.notebook)
         self.sources_tab = SourcesTab(self.notebook)
-        self.system_tab = SystemTab(self.notebook)
+        #self.system_tab = SystemTab(self.notebook)
         self.look_tab = LookTab(self.notebook)
-        self.autostart_tab = AutostartsTab(self.notebook)
-        self.software_tab = SoftwareTab(self.notebook)
-        self.deb_recovery_tab = DebRecoverTab(self.notebook)
-        self.links_tab = LinksTab(self.notebook)
-        self.about_tab = AboutTab(self.notebook)
+        #self.autostart_tab = AutostartsTab(self.notebook)
+        #self.software_tab = SoftwareTab(self.notebook)
+        #self.deb_recovery_tab = DebRecoverTab(self.notebook)
+        #self.links_tab = LinksTab(self.notebook)
+        #self.about_tab = AboutTab(self.notebook)
+
+        self.notebook.add(
+            self.willkommen_tab, compound=LEFT, text="Wilkommen", image=self.status_icon
+        )
 
         self.notebook.add(
             self.dash_tab, compound=LEFT, text="Dashboard", image=self.status_icon
@@ -118,27 +127,27 @@ class MainApplication(tk.Tk):
         self.notebook.add(
             self.sources_tab, compound=LEFT, text="Source List", image=self.source_lists
         )
-        self.notebook.add(
-            self.system_tab, compound=LEFT, text="System", image=self.system_icon
-        )
+        #self.notebook.add(
+        #    self.system_tab, compound=LEFT, text="System", image=self.system_icon
+        #)
         self.notebook.add(
             self.look_tab, compound=LEFT, text="Look & Feel", image=self.look_icon
         )
-        self.notebook.add(
-            self.autostart_tab, compound=LEFT, text="Autostart", image=self.auto_start
-        )
-        self.notebook.add(
-            self.software_tab, compound=LEFT, text="Software", image=self.install_icon
-        )
-        self.notebook.add(
-            self.deb_recovery_tab, compound=LEFT, text="Backup", image=self.deb_pack
-        )
-        self.notebook.add(
-            self.links_tab, compound=LEFT, text="Links", image=self.links_icon
-        )
-        self.notebook.add(
-            self.about_tab, compound=LEFT, text="About", image=self.support_icon
-        )
+        #self.notebook.add(
+        #    self.autostart_tab, compound=LEFT, text="Autostart", image=self.auto_start
+        #)
+        #self.notebook.add(
+        #    self.software_tab, compound=LEFT, text="Software", image=self.install_icon
+        #)
+        #self.notebook.add(
+        #    self.deb_recovery_tab, compound=LEFT, text="Backup", image=self.deb_pack
+        #)
+        #self.notebook.add(
+        #    self.links_tab, compound=LEFT, text="Links", image=self.links_icon
+        #)
+        #self.notebook.add(
+        #    self.about_tab, compound=LEFT, text="About", image=self.support_icon
+        #)
 
         # Notebook Theming
         global noteStyler

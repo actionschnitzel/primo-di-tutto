@@ -54,37 +54,6 @@ class DashTab(ttk.Frame):
             Image.open(f"{application_path}/images/icons/debian_logo_dash.png")
         )
 
-        self.dash_pigro_logo_frame = ttk.Frame(
-            self,
-        )
-
-        self.dash_pigro_logo_frame.pack(fill=BOTH)
-        #self.dash_pigro_logo_frame["background"] = maincolor
-
-        # Sys Info Labels
-        self.logo_btn = Button(
-            self.dash_pigro_logo_frame,
-            borderwidth=0,
-            #bg=frame_color,
-            highlightthickness=0,
-            command=pigro_sound,
-            activebackground="#ffffff",
-        )
-        self.logo_btn.pack(pady=20)
-        self.logo_btn_ttp = CreateToolTip(
-            self.logo_btn,
-            "\n\nEverything is a button if you are brave enough!\n\n",
-        )
-
-        # Changes Header
-        if current_month == "October":
-            self.logo_btn.config(image=self.pigroh_img)
-        elif current_month == "December":
-            self.logo_btn.config(image=self.pigrox_img)
-        elif current_month == "February":
-            self.logo_btn.config(image=self.pigro_feb_img)
-        else:
-            self.logo_btn.config(image=self.pigro_img)
 
         # Open the /proc/device-tree/model file for reading
         try:

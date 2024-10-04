@@ -38,6 +38,128 @@ class LookTab(ttk.Frame):
             file=f"{application_path}/images/icons/pigro_icons/fresh_s_light.png"
         )
 
+        self.classico_thumb = PhotoImage(
+            file=f"{application_path}/images/icons/pigro_icons/classico_thumb.png"
+        )
+
+        self.upside_thumb = PhotoImage(
+            file=f"{application_path}/images/icons/pigro_icons/upside_thumb.png"
+        )
+
+        self.elfi_thumb = PhotoImage(
+            file=f"{application_path}/images/icons/pigro_icons/elfi_thumb.png"
+        )
+
+
+        self.devil_thumb = PhotoImage(
+            file=f"{application_path}/images/icons/pigro_icons/devil_thumb.png"
+        )
+
+        def set_elfi_panel():
+            # Erster Befehl: Setze das Panel unten
+            subprocess.run([
+                'gsettings', 'set', 'org.cinnamon', 'panels-enabled', "['1:0:bottom']"
+            ])
+
+            # Zweiter Befehl: Setze die aktivierten Applets
+            subprocess.run([
+                'gsettings', 'set', 'org.cinnamon', 'enabled-applets',
+                "['panel1:center:0:menu@cinnamon.org:0', 'panel1:left:1:separator@cinnamon.org:1', 'panel1:center:1:grouped-window-list@cinnamon.org:2', 'panel1:right:0:systray@cinnamon.org:3', 'panel1:right:1:xapp-status@cinnamon.org:4', 'panel1:right:2:notifications@cinnamon.org:5', 'panel1:right:3:printers@cinnamon.org:6', 'panel1:right:4:removable-drives@cinnamon.org:7', 'panel1:right:5:keyboard@cinnamon.org:8', 'panel1:right:6:favorites@cinnamon.org:9', 'panel1:right:7:network@cinnamon.org:10', 'panel1:right:8:sound@cinnamon.org:11', 'panel1:right:9:power@cinnamon.org:12', 'panel1:right:10:calendar@cinnamon.org:13', 'panel1:right:11:cornerbar@cinnamon.org:14']"
+            ])
+
+        def set_classico_panel():
+            # Erster Befehl: Setze das Panel unten
+            subprocess.run([
+                'gsettings', 'set', 'org.cinnamon', 'panels-enabled', "['1:0:bottom']"
+            ])
+
+            # Zweiter Befehl: Setze die aktivierten Applets
+            subprocess.run([
+                'gsettings', 'set', 'org.cinnamon', 'enabled-applets',
+                "['panel1:left:0:menu@cinnamon.org:0', 'panel1:left:1:separator@cinnamon.org:1', 'panel1:left:2:grouped-window-list@cinnamon.org:2', 'panel1:right:0:systray@cinnamon.org:3', 'panel1:right:1:xapp-status@cinnamon.org:4', 'panel1:right:2:notifications@cinnamon.org:5', 'panel1:right:3:printers@cinnamon.org:6', 'panel1:right:4:removable-drives@cinnamon.org:7', 'panel1:right:5:keyboard@cinnamon.org:8', 'panel1:right:6:favorites@cinnamon.org:9', 'panel1:right:7:network@cinnamon.org:10', 'panel1:right:8:sound@cinnamon.org:11', 'panel1:right:9:power@cinnamon.org:12', 'panel1:right:10:calendar@cinnamon.org:13', 'panel1:right:11:cornerbar@cinnamon.org:14']"
+            ])
+
+        def set_der_teufel_panel():
+            # Erster Befehl: Setze das Panel oben und links
+            subprocess.run([
+                'gsettings', 'set', 'org.cinnamon', 'panels-enabled', "['1:0:top', '2:0:left']"
+            ])
+
+            # Zweiter Befehl: Setze die aktivierten Applets
+            subprocess.run([
+                'gsettings', 'set', 'org.cinnamon', 'enabled-applets',
+                "['panel2:right:0:menu@cinnamon.org:0', 'panel1:left:1:separator@cinnamon.org:1', 'panel2:left:0:grouped-window-list@cinnamon.org:2', 'panel1:right:0:systray@cinnamon.org:3', 'panel1:right:1:xapp-status@cinnamon.org:4', 'panel1:right:2:notifications@cinnamon.org:5', 'panel1:right:3:printers@cinnamon.org:6', 'panel1:right:4:removable-drives@cinnamon.org:7', 'panel1:right:5:keyboard@cinnamon.org:8', 'panel1:right:6:favorites@cinnamon.org:9', 'panel1:right:7:network@cinnamon.org:10', 'panel1:right:8:sound@cinnamon.org:11', 'panel1:right:9:power@cinnamon.org:12', 'panel1:right:10:calendar@cinnamon.org:13', 'panel1:right:11:cornerbar@cinnamon.org:14']"
+            ])
+
+        def set_upside_down_panel():
+            # Erster Befehl: Setze das Panel oben
+            subprocess.run([
+                'gsettings', 'set', 'org.cinnamon', 'panels-enabled', "['1:0:top']"
+            ])
+
+            # Zweiter Befehl: Setze die aktivierten Applets
+            subprocess.run([
+                'gsettings', 'set', 'org.cinnamon', 'enabled-applets',
+                "['panel1:left:0:menu@cinnamon.org:0', 'panel1:left:1:separator@cinnamon.org:1', 'panel1:left:2:grouped-window-list@cinnamon.org:2', 'panel1:right:0:systray@cinnamon.org:3', 'panel1:right:1:xapp-status@cinnamon.org:4', 'panel1:right:2:notifications@cinnamon.org:5', 'panel1:right:3:printers@cinnamon.org:6', 'panel1:right:4:removable-drives@cinnamon.org:7', 'panel1:right:5:keyboard@cinnamon.org:8', 'panel1:right:6:favorites@cinnamon.org:9', 'panel1:right:7:network@cinnamon.org:10', 'panel1:right:8:sound@cinnamon.org:11', 'panel1:right:9:power@cinnamon.org:12', 'panel1:right:10:calendar@cinnamon.org:13', 'panel1:right:11:cornerbar@cinnamon.org:14']"
+            ])
+
+
+        self.desktop_layout_set = ttk.LabelFrame(
+            self,
+            text="Layout",
+            padding=10
+        )
+        self.desktop_layout_set.pack(pady=20, padx=40, fill="x", anchor="n")
+        self.desktop_layout_set.grid_columnconfigure(0, weight=1)
+        self.desktop_layout_set.grid_columnconfigure(1, weight=1)
+        self.desktop_layout_set.grid_columnconfigure(2, weight=1)
+        self.desktop_layout_set.grid_columnconfigure(3, weight=1)
+
+        classico_button = ttk.Button(
+            self.desktop_layout_set,
+            text="Classico\n(Standard)",
+            compound="center",
+            image=self.classico_thumb,
+            command=set_classico_panel,
+            
+
+        )
+        classico_button.grid(row=0, column=0, padx=5, pady=5, sticky="nsew")
+
+        upside_button = ttk.Button(
+            self.desktop_layout_set,
+            text="upside down",
+            compound="center",
+            image=self.upside_thumb,
+            command=set_upside_down_panel,
+            
+
+        )
+        upside_button.grid(row=0, column=1, padx=5, pady=5, sticky="nesw")
+
+        elfi_button = ttk.Button(
+            self.desktop_layout_set,
+            text="elfi",
+            compound="center",
+            image=self.elfi_thumb,
+            command=set_elfi_panel,
+            
+
+        )
+        elfi_button.grid(row=0, column=2, padx=5, pady=5, sticky="nesw")
+
+
+        devil_button = ttk.Button(
+            self.desktop_layout_set,
+            text=" the devil",
+            compound="center",
+            image=self.devil_thumb,
+            command=set_der_teufel_panel,
+            
+
+        )
+        devil_button.grid(row=0, column=3, padx=5, pady=5, sticky="nesw")        
+
         self.pixel_set = ttk.LabelFrame(
             self,
             text="Theme Your Desktop",
@@ -408,15 +530,7 @@ class LookTab(ttk.Frame):
         )
         cursor_folder_button.grid(row=3, column=4, padx=10, pady=5, sticky="ew")
 
-        wp_folder_button = ttk.Button(
-            self.pixel_set,
-            text="Set Wallpaper Folder",
-            compound="left",
-            image=self.folder_icon,
-            command=self.select_wallpaper_directory,
-            width=20
-        )
-        wp_folder_button.grid(row=4, column=4, padx=10, pady=5, sticky="ew")
+
 
         info_button = tk.Button(
             self.pixel_set,
@@ -472,284 +586,3 @@ class LookTab(ttk.Frame):
                 print("Please select a valid icon theme.")
             done_message_0()
 
-        self.papirus_icons_frame = ttk.LabelFrame(
-            self,
-            text="Papirus Icons",
-            padding=10
-        )
-        self.papirus_icons_frame.pack(pady=20, padx=40, fill="x", anchor="n")
-
-        self.install_button = Button(
-            self.papirus_icons_frame,
-            text="Install Papirus + Folders",
-            borderwidth=0,
-            highlightthickness=0,
-            background=ext_btn,
-            foreground=ext_btn_font,
-            command=install_papirus,
-        )
-        self.install_button.grid(
-            row=1, column=0, columnspan=4, padx=10, pady=10, sticky="we"
-        )
-
-        self.icon_themes = [
-            "adwaita",
-            "black",
-            "blue",
-            "bluegrey",
-            "breeze",
-            "brown",
-            "carmine",
-            "cyan",
-            "darkcyan",
-            "deeporange",
-            "green",
-            "grey",
-            "indigo",
-            "magenta",
-            "nordic",
-            "orange",
-            "palebrown",
-            "paleorange",
-            "pink",
-            "red",
-            "teal",
-            "violet",
-            "white",
-            "yaru",
-            "yellow",
-        ]
-        self.papirus_theme_combobox = ttk.Combobox(
-            self.papirus_icons_frame, values=self.icon_themes, state="readonly"
-        )
-        self.papirus_theme_combobox.grid(
-            row=2, column=0, columnspan=2, padx=10, pady=10, sticky="wns"
-        )
-        self.papirus_theme_combobox.set("Select a Color")
-        self.icon_papirus_version = [
-            "ePapirus",
-            "Papirus",
-            "Papirus-Dark",
-            "Papirus-Light",
-        ]
-        self.papirus_version_combobox = ttk.Combobox(
-            self.papirus_icons_frame, values=self.icon_papirus_version, state="readonly"
-        )
-        self.papirus_version_combobox.grid(
-            row=2, column=2, columnspan=2, padx=10, pady=10, sticky="wns"
-        )
-        self.papirus_version_combobox.set("Select a Version")
-
-        self.set_button = Button(
-            self.papirus_icons_frame,
-            text="Set",
-            borderwidth=0,
-            highlightthickness=0,
-            background=ext_btn,
-            foreground=ext_btn_font,
-            command=set_icon_theme,
-        )
-        self.set_button.grid(row=2, column=4, padx=10, pady=10)
-
-        def xfce_theme_():
-            pass
-
-        update_theme_combobox()
-
-        if get_desktop_environment() not in [
-            "xfce",
-            "GNOME",
-            "mate",
-            "lxde",
-            "lxde-pi-wayfire",
-        ]:
-            theme_button.config(state=tk.DISABLED)
-            icon_button.config(state=tk.DISABLED)
-            cursor_button.config(state=tk.DISABLED)
-            theme_refresh_button.config(state=tk.DISABLED)
-            theme_combobox.config(state=tk.DISABLED)
-            icon_combobox.config(state=tk.DISABLED)
-            cursor_combobox.config(state=tk.DISABLED)
-            self.papirus_theme_combobox.config(state=tk.DISABLED)
-            self.papirus_version_combobox.config(state=tk.DISABLED)
-            self.set_button.config(state=tk.DISABLED)
-            self.install_button.config(state=tk.DISABLED)
-            info_button.grid(row=5, column=4, padx=10, pady=5, sticky="ew")
-
-        if (
-            get_desktop_environment() == "lxde-pi"
-            or get_desktop_environment() == "lxde"
-        ):
-            theme_legacy_button.config(state=tk.NORMAL)
-            self.papirus_theme_combobox.config(state=tk.NORMAL)
-            self.papirus_version_combobox.config(state=tk.NORMAL)
-            self.set_button.config(state=tk.NORMAL)
-            self.install_button.config(state=tk.NORMAL)
-
-        if get_desktop_environment() == "xfce":
-            theme_legacy_button.config(
-                text="XFCE Theme", state=tk.NORMAL, command=xfce_theme_
-            )
-            self.papirus_theme_combobox.config(state=tk.NORMAL)
-            self.papirus_version_combobox.config(state=tk.NORMAL)
-            self.set_button.config(state=tk.NORMAL)
-            self.install_button.config(state=tk.NORMAL)
-        if check_papirus() is True:
-            self.install_button.config(state=DISABLED)
-
-        self.wp_gallery = ttk.LabelFrame(
-            self,
-            text="Wallpaper Gallery",
-            padding=10
-
-        )
-        self.wp_gallery.pack(pady=20, padx=40, fill="both", expand=True, anchor="n")
-
-        # Create a Canvas widget to hold the content of wp_frame
-        self.canvas = Canvas(self.wp_gallery, borderwidth=0, highlightthickness=0)
-        self.canvas.pack(side="left", fill="both", expand=True)
-
-        # Add a Scrollbar and link it to the Canvas for scrolling
-        self.scrollbar = ttk.Scrollbar(self.wp_gallery, command=self.canvas.yview)
-        self.scrollbar.pack(side="right", fill="y")
-        self.canvas.config( yscrollcommand=self.scrollbar.set)
-
-        # Create wp_frame as a child of the Canvas
-        self.wp_frame = ttk.Frame(self.canvas)
-        self.canvas.create_window((0, 0), window=self.wp_frame, anchor="nw")
-
-        # Bind the Canvas to configure the scroll region when the frame size changes
-        self.wp_frame.bind("<Configure>", self.configure_canvas)
-
-        self.thumbnails_frame = None  # Initialize thumbnails_frame here
-        self.thumbnails = []
-
-        self.home_dir = os.path.expanduser("~")
-        self.config_dir = os.path.join(self.home_dir, ".pigro")
-        os.makedirs(self.config_dir, exist_ok=True)
-
-        self.wallpaper_dir = None
-        self.load_wallpaper_list()
-
-    def set_wallpapers(self, image_path):
-        try:
-            if get_desktop_environment() == "lxde-pi-wayfire":
-                os.popen(f"pcmanfm --set-wallpaper {image_path}")
-            elif get_desktop_environment() == "lxde":
-                os.popen(f"pcmanfm --set-wallpaper {image_path}")
-            elif get_desktop_environment() == "xfce":
-                os.popen(
-                    f"xfconf-query -c xfce4-desktop -p insert_property_here -s {image_path}"
-                )
-            elif get_desktop_environment() == "mate":
-                subprocess.run(
-                    [
-                        "gsettings",
-                        "set",
-                        "org.mate.background",
-                        "picture-filename",
-                        f"{image_path}",
-                    ]
-                )
-            elif get_desktop_environment() == "gnome":
-                subprocess.run(
-                    [
-                        "gsettings",
-                        "set",
-                        "org.gnome.desktop.background",
-                        "picture-uri-dark",
-                        f"file://{image_path}",
-                    ]
-                )
-                subprocess.run(
-                    [
-                        "gsettings",
-                        "set",
-                        "org.gnome.desktop.background",
-                        "picture-uri",
-                        f"file://{image_path}",
-                    ]
-                )
-            print(f"Wallpaper set to: {image_path}")
-        except Exception as e:
-            print(f"Error setting wallpaper: {e}")
-
-    def change_wallpaper(self, image_path):
-        self.set_wallpapers(image_path)
-
-    def select_wallpaper_directory(self):
-        self.wallpaper_dir = filedialog.askdirectory(
-            title="Select Wallpaper Directory", initialdir=self.home_dir
-        )
-
-        if self.wallpaper_dir:
-            self.refresh_thumbnails()
-            self.save_wallpaper_list()
-
-    def save_wallpaper_list(self):
-        if self.wallpaper_dir:
-            data = {
-                "wallpaper_dir": self.wallpaper_dir,
-                "wallpapers": [img[0] for img in self.thumbnails],
-            }
-            config_path = os.path.join(self.config_dir, "config.json")
-            with open(config_path, "w", encoding="utf-8") as config_file:
-                json.dump(data, config_file)
-
-    def load_wallpaper_list(self):
-        config_path = os.path.join(self.config_dir, "config.json")
-        if os.path.isfile(config_path):
-            with open(config_path, "r", encoding="utf-8") as config_file:
-                data = json.load(config_file)
-                self.wallpaper_dir = data["wallpaper_dir"]
-                self.refresh_thumbnails()
-
-    def refresh_thumbnails(self):
-        if self.thumbnails_frame is not None:
-            for widget in self.thumbnails_frame.winfo_children():
-                widget.destroy()
-
-        if not self.wallpaper_dir:
-            return
-
-        image_files = [
-            f
-            for f in os.listdir(self.wallpaper_dir)
-            if f.lower().endswith((".jpg", ".jpeg", ".png", ".gif"))
-        ]
-
-        self.thumbnails_frame = ttk.Frame(self.wp_frame)
-        self.thumbnails_frame.pack()
-
-        self.row, self.col = 0, 0
-        self.thumbnails = []
-
-        for image_file in image_files:
-            image_path = os.path.join(self.wallpaper_dir, image_file)
-            image = Image.open(image_path)
-            image.thumbnail((220, 220))
-            thumbnail = ImageTk.PhotoImage(image)
-            self.thumbnails.append((image_path, thumbnail))
-
-        for image_path, thumbnail in self.thumbnails:
-            button = Button(
-                self.thumbnails_frame,
-                image=thumbnail,
-                command=lambda path=image_path: self.change_wallpaper(path),
-                borderwidth=0,
-                highlightthickness=0,
-            )
-            button.grid(row=self.row, column=self.col, padx=5, pady=5)
-
-            self.col += 1
-            if self.col == 4:
-                self.col = 0
-                self.row += 1
-
-    def add_content(self):
-        for i in range(50):
-            label = Label(self.wp_frame, text=f"Item {i}")
-            label.pack()
-
-    def configure_canvas(self, event):
-        self.canvas.config(scrollregion=self.canvas.bbox("all"))
