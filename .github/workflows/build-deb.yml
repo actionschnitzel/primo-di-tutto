@@ -17,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up environment
+      - name: Set up environment variables
         run: |
           PACKAGE_NAME="primo-di-tutto"
           VERSION="0.4.6"
@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y dpkg-dev fakeroot
+          sudo apt-get install -y dpkg-dev fakeroot rsync
 
       - name: Create directory structure
         run: |
@@ -49,6 +49,10 @@ jobs:
 
       - name: Create control file
         run: |
+          PACKAGE_NAME="primo-di-tutto"
+          VERSION="0.4.6"
+          DEPENDENCIES="python3-dev, python3-psutil, python3-distro, python3-bs4, python3-requests, python3-pil, python3-pil.imagetk, xterm, mpg123, lolcat, wmctrl, gdebi, mousepad, appstream, pkexec | policykit-1"
+          
           cat > PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/control << EOF
           Package: $PACKAGE_NAME
           Version: $VERSION
@@ -88,7 +92,24 @@ jobs:
           EOF
           chmod +x PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/postinst
 
-      - name: Build DEB package
+      - name: Create .desktop file
+        run: |
+          cat > PRIMO-DEBIAN-BUILD-BOX/debian/usr/share/applications/primo-di-tutto.desktop << EOL
+          [Desktop Entry]
+          Version=2.1
+          Exec=primo-di-tutto
+          Name=Primo Di Tutto
+          GenericName=Primo
+          Encoding=UTF-8
+          Terminal=false
+          StartupWMClass=Primo
+          Type=Application
+          Categories=System
+          Icon=primo-di-tutto-logo
+          Path=/opt/primo-di-tutto/
+          EOL
+
+      - name: Set permissions and build DEB package
         run: |
           chmod -R 755 PRIMO-DEBIAN-BUILD-BOX/debian
           sudo chown -R root:root PRIMO-DEBIAN-BUILD-BOX/debian
