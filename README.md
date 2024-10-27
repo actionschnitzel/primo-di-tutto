@@ -1,5 +1,16 @@
-# primo-di-tutto
+# Primo Di Tutto
+### Willkommensbildschirm und Config-Tool für pgOS
 
-This is a hard fork of [PiGro - Just Click It!](https://github.com/actionschnitzel/PiGro-Aid-) that is customized and optimizes for the use on Ubuntu Cinnamon.
+## To Do List
 
-Work in progress 
+- [x] Code pushen der nicht wie von einem Anfänger aussieht
+- [ ] Willkommen Tab 
+- [ ] Look & Feel Tab
+- [ ] Software Tab
+- [ ] Mitmachen Tab
+- [ ] Light Mode Icons
+- [ ] Dark Mode Icons
+
+- [ ] Code säuber
+- [ ] Code formatieren mit Black
+- [ ] Debian Paket-Skript anpassen
