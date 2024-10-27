@@ -8,6 +8,11 @@ on:
     branches:
       - main
 
+env:
+  PACKAGE_NAME: "primo-di-tutto"
+  VERSION: "0.4.6"
+  DEPENDENCIES: "python3-dev, python3-psutil, python3-distro, python3-bs4, python3-requests, python3-pil, python3-pil.imagetk, xterm, mpg123, lolcat, wmctrl, gdebi, mousepad, appstream, pkexec | policykit-1"
+
 jobs:
   build-deb-package:
     runs-on: ubuntu-latest
@@ -15,12 +20,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Set up environment variables
-        run: |
-          PACKAGE_NAME="primo-di-tutto"
-          VERSION="0.4.6"
-          DEPENDENCIES="python3-dev, python3-psutil, python3-distro, python3-bs4, python3-requests, python3-pil, python3-pil.imagetk, xterm, mpg123, lolcat, wmctrl, gdebi, mousepad, appstream, pkexec | policykit-1"
 
       - name: Install dependencies
         run: |
@@ -48,76 +47,33 @@ jobs:
 
       - name: Create control file
         run: |
-          cat > PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/control << EOF
-          Package: $PACKAGE_NAME
-          Version: $VERSION
-          Architecture: all
-          Maintainer: Timo Westphal <pigroxtrmo@gmail.com>
-          Depends: $DEPENDENCIES
-          Section: misc
-          Priority: optional
-          Homepage: https://zestful-pigroxtrmo.wordpress.com/
-          License: GPL-3.0
-          Description: A system control tool for Raspberry Pi
-           PiGro is a system configuration tool inspired by openSUSE's YaST
-           but designed with the user-friendliness of Linux Mint in mind.
-          EOF
-
-      - name: Create DEBIAN scripts
-        run: |
-          cat > PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/preinst << 'EOF'
-          #!/bin/bash
-          default_terminal=$(readlink -f /usr/bin/x-terminal-emulator)
-          echo "$default_terminal" > /tmp/default_terminal_path
-          EOF
-          chmod +x PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/preinst
-
-          cat > PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/postinst << 'EOF'
-          #!/bin/bash
-          default_terminal_path=$(cat /tmp/default_terminal_path)
-          if [ ! -z "$default_terminal_path" ] && [ "$(readlink -f /usr/bin/x-terminal-emulator)" != "$default_terminal_path" ]; then
-            update-alternatives --set x-terminal-emulator "$default_terminal_path"
-          fi
-          rm -f /tmp/default_terminal_path
-          USER_HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
-          AUTOSTART_DIR="$USER_HOME/.config/autostart"
-          mkdir -p "$AUTOSTART_DIR"
-          cp /usr/share/applications/autostart/primo-di-tutto-autostart.desktop "$AUTOSTART_DIR/"
-          chmod +x "$AUTOSTART_DIR/primo-di-tutto-autostart.desktop"
-          EOF
-          chmod +x PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/postinst
-
-      - name: Create .desktop file
-        run: |
-          cat > PRIMO-DEBIAN-BUILD-BOX/debian/usr/share/applications/primo-di-tutto.desktop << EOL
-          [Desktop Entry]
-          Version=2.1
-          Exec=primo-di-tutto
-          Name=Primo Di Tutto
-          GenericName=Primo
-          Encoding=UTF-8
-          Terminal=false
-          StartupWMClass=Primo
-          Type=Application
-          Categories=System
-          Icon=primo-di-tutto-logo
-          Path=/opt/primo-di-tutto/
-          EOL
+          echo "Package: ${PACKAGE_NAME}" > PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/control
+          echo "Version: ${VERSION}" >> PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/control
+          echo "Architecture: all" >> PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/control
+          echo "Maintainer: Timo Westphal <pigroxtrmo@gmail.com>" >> PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/control
+          echo "Depends: ${DEPENDENCIES}" >> PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/control
+          echo "Section: misc" >> PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/control
+          echo "Priority: optional" >> PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/control
+          echo "Homepage: https://zestful-pigroxtrmo.wordpress.com/" >> PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/control
+          echo "License: GPL-3.0" >> PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/control
+          echo "Description: A system control tool for Raspberry Pi" >> PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/control
+          echo " PiGro is a system configuration tool inspired by openSUSE's YaST" >> PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/control
+          echo " but designed with the user-friendliness of Linux Mint in mind." >> PRIMO-DEBIAN-BUILD-BOX/debian/DEBIAN/control
 
       - name: Set permissions and build DEB package
         run: |
           chmod -R 755 PRIMO-DEBIAN-BUILD-BOX/debian
           sudo chown -R root:root PRIMO-DEBIAN-BUILD-BOX/debian
           dpkg-deb --build -Zxz PRIMO-DEBIAN-BUILD-BOX/debian
-          mv PRIMO-DEBIAN-BUILD-BOX/debian.deb ./primo-di-tutto-$VERSION.deb
+          mv PRIMO-DEBIAN-BUILD-BOX/debian.deb ./${PACKAGE_NAME}-${VERSION}.deb
 
       - name: Verify DEB package file
         run: |
           ls -la
-          ls -la ./primo-di-tutto-$VERSION.deb
+          ls -la ./${PACKAGE_NAME}-${VERSION}.deb
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: primo-di-tutto-deb
-          path: ./primo-di-tutto-$VERSION.deb
+          path: ./${PACKAGE_NAME}-${VERSION}.deb
