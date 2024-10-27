@@ -65,15 +65,15 @@ jobs:
           chmod -R 755 PRIMO-DEBIAN-BUILD-BOX/debian
           sudo chown -R root:root PRIMO-DEBIAN-BUILD-BOX/debian
           dpkg-deb --build -Zxz PRIMO-DEBIAN-BUILD-BOX/debian
-          mv PRIMO-DEBIAN-BUILD-BOX/debian.deb ./${PACKAGE_NAME}-${VERSION}.deb
+          mv PRIMO-DEBIAN-BUILD-BOX/debian.deb ./primo-di-tutto-0.4.6.deb
 
       - name: Verify DEB package file
         run: |
           ls -la
-          ls -la ./${PACKAGE_NAME}-${VERSION}.deb
+          ls -la ./primo-di-tutto-0.4.6.deb
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: primo-di-tutto-deb
-          path: ./${PACKAGE_NAME}-${VERSION}.deb
+          path: ./primo-di-tutto-0.4.6.deb
